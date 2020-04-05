@@ -1,6 +1,5 @@
 package com.retail.shoping.productservice.serviceimpl;
 
-import com.retail.shoping.productservice.model.Product;
 import com.retail.shoping.productservice.model.ProductEs;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -16,6 +15,7 @@ import java.util.List;
 
 @Service
 public class QueryDSLService {
+
     @Autowired
     private ElasticsearchTemplate template;
 
@@ -37,8 +37,8 @@ public class QueryDSLService {
     public List<ProductEs> searchByPriceField(int startPrice, int endPrice) {
         QueryBuilder query = QueryBuilders.rangeQuery("retailPrice").from(startPrice).to(endPrice);
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(query).build();
-        List<ProductEs> customers = template.queryForList(nativeSearchQuery, ProductEs.class);
-        return customers;
+        List<ProductEs> productEs = template.queryForList(nativeSearchQuery, ProductEs.class);
+        return productEs;
 
     }
 

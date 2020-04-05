@@ -1,6 +1,7 @@
 package com.retail.shoping.productservice.config;
 
 import org.elasticsearch.node.NodeBuilder;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
@@ -23,5 +24,6 @@ public class EsConfig {
     public ElasticsearchOperations elasticsearchTemplate() throws IOException {
         return new ElasticsearchTemplate(builder().local(true).node().client());
     }
+
 
 }

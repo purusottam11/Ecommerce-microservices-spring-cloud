@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication
 
+@SpringBootApplication
 //@EnableEurekaClient
 public class ProductServiceApplication {
 
@@ -15,10 +15,5 @@ public class ProductServiceApplication {
         SpringApplication.run(ProductServiceApplication.class, args);
     }
 
-    @Bean
-    //@LoadBalanced
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
 }

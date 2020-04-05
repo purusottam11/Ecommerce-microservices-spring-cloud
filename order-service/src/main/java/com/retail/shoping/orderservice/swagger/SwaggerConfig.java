@@ -1,4 +1,4 @@
-package com.retail.shoping.productservice.swagger;
+package com.retail.shoping.orderservice.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,15 +15,15 @@ import static springfox.documentation.builders.PathSelectors.regex;
 public class SwaggerConfig {
     @Bean
     public Docket postsApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("Product Service").apiInfo(apiInfo()).select()
+        return new Docket(DocumentationType.SWAGGER_2).groupName("Purusottam").apiInfo(apiInfo()).select()
                 .paths(regex("/.*")).build();
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Purusottam")
+        return new ApiInfoBuilder().title("Order service")
                 .description("Sample Documentation Generateed Using SWAGGER2 for our Book Rest API")
-                .termsOfServiceUrl("nineleaps.com")
-                .license("Java")
-                .licenseUrl("nineleaps.com").version("1.0").build();
+                .termsOfServiceUrl("nineleaps")
+                .license("Java License")
+                .licenseUrl("ninsleaps.com").version("1.0").build();
     }
 }
