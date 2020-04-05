@@ -36,4 +36,8 @@ public class ProductController {
         return productService.isProductExist(productName);
     }
 
+    @PostMapping("/is-product-out-of-stuck")
+    public boolean isProductOutOfStuck(@RequestBody String productId) {
+        return productService.isProductOutOfStuck(productId);
+    }
 }

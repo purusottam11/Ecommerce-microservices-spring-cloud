@@ -1,4 +1,4 @@
 package com.retail.shoping.productservice.service;
 
-public class CategoryService {
+public interface CategoryService {
 }

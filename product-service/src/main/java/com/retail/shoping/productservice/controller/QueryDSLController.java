@@ -25,4 +25,10 @@ public class QueryDSLController {
         return service.multiMatchQuery(text);
     }
 
+
+    @GetMapping("/serch-by-prict/{start}/{end}")
+    public List<ProductEs> getProductSearchByPrice(@PathVariable int start, @PathVariable int end) {
+        return service.searchByPriceField(start, end);
+    }
+
 }

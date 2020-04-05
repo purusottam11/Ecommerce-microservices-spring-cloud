@@ -39,4 +39,12 @@ public class ProductServiceImpl implements ProductService {
         }
         return true;
     }
+
+    @Override
+    public boolean isProductOutOfStuck(String pid) {
+        if (productRepository.findByPid(pid) == null) {
+            return true;
+        }
+        return false;
+    }
 }
