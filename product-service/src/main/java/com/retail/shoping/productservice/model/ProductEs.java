@@ -1,46 +1,32 @@
 package com.retail.shoping.productservice.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
-public class Product {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+@Document(indexName = "purusottam", type = "productes")
+public class ProductEs {
 
     @Id
-    @Column(name = "uniq_id")
     private String uniqId;
-    @Column(name = "crawl_timestamp")
     private String crawlTimestamp;
-    @Column(name = "product_url")
     private String productUrl;
-    @Column(name = "product_name")
     private String productName;
-    @Column(name = "category")
     private Long category;
-    @Column(name = "pid")
     private String pid;
-    @Column(name = "retail_price")
     private String retailPrice;
-    @Column(name = "discounted_price")
     private String discountedPrice;
-    @Column(name = "image")
     private String image;
-    @Column(name = "is_FK_Advantage_product")
     private String isFKAdvantageProduct;
-    @Column(name = "description")
     private String description;
-    @Column(name = "product_rating")
     private String productRating;
-    @Column(name = "overall_rating")
     private String overallRating;
-    @Column(name = "brand")
     private String brand;
 
-    public Product() {
+    public ProductEs() {
     }
 
-    public Product(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, String retailPrice, String discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
+    public ProductEs(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, String retailPrice, String discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
         this.uniqId = uniqId;
         this.crawlTimestamp = crawlTimestamp;
         this.productUrl = productUrl;
@@ -171,7 +157,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductEs{" +
                 "uniqId='" + uniqId + '\'' +
                 ", crawlTimestamp='" + crawlTimestamp + '\'' +
                 ", productUrl='" + productUrl + '\'' +

@@ -96,31 +96,36 @@ public class DemoServiceImpl implements DemoService {
         List<Demo> demoList = demoRepository.findAll();
         for (Demo demo : demoList) {
             Product product = new Product();
-            product.setUniq_id(demo.getUniq_id());
-            product.setCrawl_timestamp(demo.getCrawl_timestamp());
-            product.setProduct_url(demo.getProduct_url());
-            product.setProduct_name(demo.getProduct_name());
+            product.setUniqId(demo.getUniq_id());
+            product.setCrawlTimestamp(demo.getCrawl_timestamp());
+            product.setProductUrl(demo.getProduct_url());
+            product.setProductName(demo.getProduct_name());
             product.setPid(demo.getPid());
-            product.setRetail_price(demo.getRetail_price());
-            product.setDiscounted_price(demo.getDiscounted_price());
+            product.setRetailPrice(demo.getRetail_price());
+            product.setDiscountedPrice(demo.getDiscounted_price());
             product.setImage(demo.getImage());
-            product.setIs_FK_Advantage_product(demo.getIs_FK_Advantage_product());
+            product.setIsFKAdvantageProduct(demo.getIs_FK_Advantage_product());
             product.setDescription(demo.getDescription());
-            product.setProduct_rating(demo.getProduct_rating());
-            product.setOverall_rating(demo.getOverall_rating());
-            String brandName = demo.getBrand();
-            Brand brand = brandRepository.findByName(brandName);
-            product.setBrand(brand.getId());
+            product.setProductRating(demo.getProduct_rating());
+            product.setOverallRating(demo.getOverall_rating());
+            product.setBrand(demo.getBrand());
 
             String string = demo.getProduct_category_tree();
-            String[] categories = string.toString().split(">>");
+            List<String> categories = Arrays.asList(string.toString().split(">>"));
 
-            String categoryName = categories[0];
-
-            Category category1 = categoryRepository.findByName(categoryName);
-            if (category1 != null) {
-                product.setCategory(category1.getId());
+            String previous = "";
+            for (int i = 0; i < categories.size(); i++) {
+                String s = categories.get(i);
+                StringBuilder stringBuilder1 = new StringBuilder(s);
+                stringBuilder1.deleteCharAt(0);
+                s = stringBuilder1.toString();
+                if (i == 0) {
+                    previous = s;
+                } else {
+                    previous = s;
+                }
             }
+            product.setCategory(categoryRepository.findByName(previous).getId());
             productRepository.save(product);
             productList.add(product);
         }
