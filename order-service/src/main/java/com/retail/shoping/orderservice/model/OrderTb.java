@@ -4,8 +4,8 @@ package com.retail.shoping.orderservice.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "ordertb")
+public class OrderTb {
 
     @Id
     @GeneratedValue
@@ -16,10 +16,10 @@ public class Order {
     private String userId;
 
 
-    public Order() {
+    public OrderTb() {
     }
 
-    public Order(Long id, String productId, String userId) {
+    public OrderTb(Long id, String productId, String userId) {
         this.id = id;
         this.productId = productId;
         this.userId = userId;

@@ -2,7 +2,7 @@ package com.retail.shoping.orderservice.serviceimpl;
 
 import com.retail.shoping.orderservice.exception.BusinessException;
 import com.retail.shoping.orderservice.exception.ErrorCode;
-import com.retail.shoping.orderservice.model.Order;
+import com.retail.shoping.orderservice.model.OrderTb;
 import com.retail.shoping.orderservice.repository.OrderRepository;
 import com.retail.shoping.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +21,17 @@ public class OrderServiceImpl implements OrderService {
     private RestTemplate template;
 
     @Override
-    public Order addOrder(Order order) {
+    public OrderTb addOrder(OrderTb order) {
         boolean result = checkProductOutOfStuck(order.getProductId());
         if (result) {
             throw new BusinessException(ErrorCode.PRODUCT_NOT_FOUND.getMessage());
         }
-        Order order1 = orderRepository.save(order);
+        OrderTb order1 = orderRepository.save(order);
         return order1;
     }
 
     @Override
-    public List<Order> getAllOrder() {
+    public List<OrderTb> getAllOrder() {
         return orderRepository.findAll();
     }
 
