@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ordertb")
-public class OrderTb {
+public class Order {
 
     @Id
     @GeneratedValue
@@ -16,10 +16,10 @@ public class OrderTb {
     private String userId;
 
 
-    public OrderTb() {
+    public Order() {
     }
 
-    public OrderTb(Long id, String productId, String userId) {
+    public Order(Long id, String productId, String userId) {
         this.id = id;
         this.productId = productId;
         this.userId = userId;

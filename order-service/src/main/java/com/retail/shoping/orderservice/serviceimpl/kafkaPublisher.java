@@ -2,17 +2,25 @@ package com.retail.shoping.orderservice.serviceimpl;
 
 import com.retail.shoping.orderservice.exception.BusinessException;
 import com.retail.shoping.orderservice.exception.ErrorCode;
-import com.retail.shoping.orderservice.model.OrderTb;
+import com.retail.shoping.orderservice.model.Order;
 import com.retail.shoping.orderservice.repository.OrderRepository;
 import com.retail.shoping.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class kafkaPublisher implements OrderService {
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+    private String topic = "purusottam";
 
     @Autowired
     private OrderRepository orderRepository;
@@ -20,18 +28,28 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private RestTemplate template;
 
-    @Override
-    public OrderTb addOrder(OrderTb order) {
+    @PostMapping("/add-product-to-kafka")
+    public Order addProductToKafkaTopic(@RequestBody Order order) {
         boolean result = checkProductOutOfStuck(order.getProductId());
         if (result) {
             throw new BusinessException(ErrorCode.PRODUCT_NOT_FOUND.getMessage());
         }
-        OrderTb order1 = orderRepository.save(order);
+        kafkaTemplate.send(topic, order);
+        return order;
+    }
+
+    @Override
+    public Order addOrder(Order order) {
+        boolean result = checkProductOutOfStuck(order.getProductId());
+        if (result) {
+            throw new BusinessException(ErrorCode.PRODUCT_NOT_FOUND.getMessage());
+        }
+        Order order1 = orderRepository.save(order);
         return order1;
     }
 
     @Override
-    public List<OrderTb> getAllOrder() {
+    public List<Order> getAllOrder() {
         return orderRepository.findAll();
     }
 
