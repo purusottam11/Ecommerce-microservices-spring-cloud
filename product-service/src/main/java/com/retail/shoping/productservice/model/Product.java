@@ -10,37 +10,50 @@ public class Product {
     @Id
     @Column(name = "uniq_id")
     private String uniqId;
+
     @Column(name = "crawl_timestamp")
     private String crawlTimestamp;
+
     @Column(name = "product_url")
     private String productUrl;
+
     @Column(name = "product_name")
     private String productName;
+
     @Column(name = "category")
     private Long category;
+
     @Column(name = "pid")
     private String pid;
+
     @Column(name = "retail_price")
-    private String retailPrice;
+    private Integer retailPrice;
+
     @Column(name = "discounted_price")
-    private String discountedPrice;
+    private Integer discountedPrice;
+
     @Column(name = "image")
     private String image;
+
     @Column(name = "is_FK_Advantage_product")
     private String isFKAdvantageProduct;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "product_rating")
     private String productRating;
+
     @Column(name = "overall_rating")
     private String overallRating;
+
     @Column(name = "brand")
     private String brand;
 
     public Product() {
     }
 
-    public Product(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, String retailPrice, String discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
+    public Product(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, Integer retailPrice, Integer discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
         this.uniqId = uniqId;
         this.crawlTimestamp = crawlTimestamp;
         this.productUrl = productUrl;
@@ -105,19 +118,19 @@ public class Product {
         this.pid = pid;
     }
 
-    public String getRetailPrice() {
+    public Integer getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(String retailPrice) {
+    public void setRetailPrice(Integer retailPrice) {
         this.retailPrice = retailPrice;
     }
 
-    public String getDiscountedPrice() {
+    public Integer getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(String discountedPrice) {
+    public void setDiscountedPrice(Integer discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 
@@ -178,8 +191,8 @@ public class Product {
                 ", productName='" + productName + '\'' +
                 ", category=" + category +
                 ", pid='" + pid + '\'' +
-                ", retailPrice='" + retailPrice + '\'' +
-                ", discountedPrice='" + discountedPrice + '\'' +
+                ", retailPrice=" + retailPrice +
+                ", discountedPrice=" + discountedPrice +
                 ", image='" + image + '\'' +
                 ", isFKAdvantageProduct='" + isFKAdvantageProduct + '\'' +
                 ", description='" + description + '\'' +

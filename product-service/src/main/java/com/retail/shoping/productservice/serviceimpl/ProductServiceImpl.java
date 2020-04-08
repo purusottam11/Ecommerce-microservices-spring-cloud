@@ -27,6 +27,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product upDateProduct(Product product) {
+        return null;
+    }
+
+
+    @Override
     public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
@@ -47,4 +53,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return false;
     }
+
+
+
 }

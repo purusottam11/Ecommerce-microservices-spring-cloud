@@ -4,7 +4,7 @@ package com.retail.shoping.productservice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName = "purusottam", type = "productes")
+@Document(indexName = "productes", type = "product")
 public class ProductEs {
 
     @Id
@@ -14,8 +14,8 @@ public class ProductEs {
     private String productName;
     private Long category;
     private String pid;
-    private String retailPrice;
-    private String discountedPrice;
+    private Integer retailPrice;
+    private Integer discountedPrice;
     private String image;
     private String isFKAdvantageProduct;
     private String description;
@@ -26,7 +26,7 @@ public class ProductEs {
     public ProductEs() {
     }
 
-    public ProductEs(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, String retailPrice, String discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
+    public ProductEs(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, Integer retailPrice, Integer discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
         this.uniqId = uniqId;
         this.crawlTimestamp = crawlTimestamp;
         this.productUrl = productUrl;
@@ -91,19 +91,19 @@ public class ProductEs {
         this.pid = pid;
     }
 
-    public String getRetailPrice() {
+    public Integer getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(String retailPrice) {
+    public void setRetailPrice(Integer retailPrice) {
         this.retailPrice = retailPrice;
     }
 
-    public String getDiscountedPrice() {
+    public Integer getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(String discountedPrice) {
+    public void setDiscountedPrice(Integer discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 
@@ -164,8 +164,8 @@ public class ProductEs {
                 ", productName='" + productName + '\'' +
                 ", category=" + category +
                 ", pid='" + pid + '\'' +
-                ", retailPrice='" + retailPrice + '\'' +
-                ", discountedPrice='" + discountedPrice + '\'' +
+                ", retailPrice=" + retailPrice +
+                ", discountedPrice=" + discountedPrice +
                 ", image='" + image + '\'' +
                 ", isFKAdvantageProduct='" + isFKAdvantageProduct + '\'' +
                 ", description='" + description + '\'' +

@@ -10,7 +10,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @Query("select c from Product c where c.productName=:productName")
     Product findByProductName(String productName);
 
-
     @Query("select c from Product c where c.pid=:pid")
     Product findByPid(@Param("pid") String pid);
 

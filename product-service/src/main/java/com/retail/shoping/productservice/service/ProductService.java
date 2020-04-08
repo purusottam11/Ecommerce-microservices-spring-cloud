@@ -8,10 +8,12 @@ public interface ProductService {
 
     Product addProduct(Product product);
 
+    Product upDateProduct(Product product);
+
     List<Product> getAllProduct();
 
     boolean isProductExist(String productName);
 
-    boolean isProductOutOfStuck(String productId);
+    boolean isProductOutOfStuck(String pid);
 
 }

@@ -1,4 +1,4 @@
-package com.retail.shoping.productservice.swagger;
+package com.retail.shoping.productservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 public class SwaggerConfig {
     @Bean
     public Docket postsApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("Product Service").apiInfo(apiInfo()).select()
+        return new Docket(DocumentationType.SWAGGER_2).groupName("Product Service API").apiInfo(apiInfo()).select()
                 .paths(regex("/.*")).build();
     }
 

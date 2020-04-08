@@ -21,14 +21,14 @@ public class ProductEsController {
     @Autowired
     private ProductEsServiceImpl productEsService;
 
-    @GetMapping("/product-es-data-import")
+    @GetMapping("/import-products-to-ES")
     public List<ProductEs> bulkImportToProductEs() {
         List<ProductEs> list = productEsService.importDataIntoProductEs();
         log.debug("Responce {}", list);
         return list;
     }
 
-    @GetMapping("/list-productes")
+    @GetMapping("/list-product-ES")
     public List<ProductEs> getAllProductEs() {
         List<ProductEs> list = productEsService.getAllEsRecord();
         log.debug("Responce {}", list);

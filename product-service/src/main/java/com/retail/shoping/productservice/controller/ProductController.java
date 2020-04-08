@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     Logger log = LoggerFactory.getLogger(ProductController.class);
@@ -28,14 +28,14 @@ public class ProductController {
 
     @PostMapping("/add-product")
     public Product addProduct(@RequestBody Product product) {
-        log.debug("Request {}", product);
+        log.info("Request {}", product);
         Product product1 = new Product();
         try {
             product1 = productService.addProduct(product);
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
-        log.debug("Response {}", product1);
+        log.info("Response {}", product1);
         return product1;
     }
 
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping("/is-product-out-of-stuck")
-    public boolean isProductOutOfStuck(@RequestBody String productId) {
-        return productService.isProductOutOfStuck(productId);
+    public boolean isProductOutOfStuck(@RequestBody String productPid) {
+        return productService.isProductOutOfStuck(productPid);
     }
 }

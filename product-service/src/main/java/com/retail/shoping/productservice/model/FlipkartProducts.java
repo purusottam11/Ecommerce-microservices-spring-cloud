@@ -4,11 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "demo")
-public class Demo implements Serializable {
+@Table(name = "flipkart_product_data")
+public class FlipkartProducts {
 
     @Id
     @Column
@@ -18,8 +17,8 @@ public class Demo implements Serializable {
     private String product_name;
     private String product_category_tree;
     private String pid;
-    private String retail_price;
-    private String discounted_price;
+    private Integer retail_price;
+    private Integer discounted_price;
     private String image;
     private String is_FK_Advantage_product;
     private String description;
@@ -28,10 +27,10 @@ public class Demo implements Serializable {
     private String brand;
     private String Product_specifications;
 
-    public Demo() {
+    public FlipkartProducts() {
     }
 
-    public Demo(String uniq_id, String crawl_timestamp, String product_url, String product_name, String product_category_tree, String pid, String retail_price, String discounted_price, String image, String is_FK_Advantage_product, String description, String product_rating, String overall_rating, String brand, String product_specifications) {
+    public FlipkartProducts(String uniq_id, String crawl_timestamp, String product_url, String product_name, String product_category_tree, String pid, Integer retail_price, Integer discounted_price, String image, String is_FK_Advantage_product, String description, String product_rating, String overall_rating, String brand, String product_specifications) {
         this.uniq_id = uniq_id;
         this.crawl_timestamp = crawl_timestamp;
         this.product_url = product_url;
@@ -97,19 +96,19 @@ public class Demo implements Serializable {
         this.pid = pid;
     }
 
-    public String getRetail_price() {
+    public Integer getRetail_price() {
         return retail_price;
     }
 
-    public void setRetail_price(String retail_price) {
+    public void setRetail_price(Integer retail_price) {
         this.retail_price = retail_price;
     }
 
-    public String getDiscounted_price() {
+    public Integer getDiscounted_price() {
         return discounted_price;
     }
 
-    public void setDiscounted_price(String discounted_price) {
+    public void setDiscounted_price(Integer discounted_price) {
         this.discounted_price = discounted_price;
     }
 
@@ -171,15 +170,15 @@ public class Demo implements Serializable {
 
     @Override
     public String toString() {
-        return "Demo{" +
+        return "FlipkartProducts{" +
                 "uniq_id='" + uniq_id + '\'' +
                 ", crawl_timestamp='" + crawl_timestamp + '\'' +
                 ", product_url='" + product_url + '\'' +
                 ", product_name='" + product_name + '\'' +
                 ", product_category_tree='" + product_category_tree + '\'' +
                 ", pid='" + pid + '\'' +
-                ", retail_price='" + retail_price + '\'' +
-                ", discounted_price='" + discounted_price + '\'' +
+                ", retail_price=" + retail_price +
+                ", discounted_price=" + discounted_price +
                 ", image='" + image + '\'' +
                 ", is_FK_Advantage_product='" + is_FK_Advantage_product + '\'' +
                 ", description='" + description + '\'' +

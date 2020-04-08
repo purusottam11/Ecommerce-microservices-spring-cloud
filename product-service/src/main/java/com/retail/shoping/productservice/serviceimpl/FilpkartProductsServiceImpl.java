@@ -1,14 +1,13 @@
 package com.retail.shoping.productservice.serviceimpl;
 
-import com.retail.shoping.productservice.model.Brand;
 import com.retail.shoping.productservice.model.Category;
-import com.retail.shoping.productservice.model.Demo;
+import com.retail.shoping.productservice.model.FlipkartProducts;
 import com.retail.shoping.productservice.model.Product;
 import com.retail.shoping.productservice.repository.BrandRepository;
 import com.retail.shoping.productservice.repository.CategoryRepository;
-import com.retail.shoping.productservice.repository.DemoRepository;
+import com.retail.shoping.productservice.repository.FlipkartProductsRepository;
 import com.retail.shoping.productservice.repository.ProductRepository;
-import com.retail.shoping.productservice.service.DemoService;
+import com.retail.shoping.productservice.service.FlipkartProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class DemoServiceImpl implements DemoService {
+public class FilpkartProductsServiceImpl implements FlipkartProductsService {
 
     @Autowired
-    private DemoRepository demoRepository;
+    private FlipkartProductsRepository flipkartProductsRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -32,12 +31,12 @@ public class DemoServiceImpl implements DemoService {
     private ProductRepository productRepository;
 
     @Override
-    public List<String> getAllCategoryTree() {
+    public List<String> importDataToCategoryTable() {
         List<String> list = new ArrayList<>();
-        List<Demo> demoList = demoRepository.findAll();
+        List<FlipkartProducts> flipkartProductsList = flipkartProductsRepository.findAll();
         int c = 0;
-        for (Demo demo : demoList) {
-            String string = demo.getProduct_category_tree();
+        for (FlipkartProducts flipkartProducts : flipkartProductsList) {
+            String string = flipkartProducts.getProduct_category_tree();
 
             List<String> categories = Arrays.asList(string.toString().split(">>"));
 
@@ -70,47 +69,36 @@ public class DemoServiceImpl implements DemoService {
                 }
             }
         }
-
-        List<String> brands = new ArrayList<>();
-
-        for (Demo demo : demoList) {
-            String brand = demo.getBrand();
-            if (brandRepository.findByName(brand) == null) {
-                Brand brand1 = new Brand();
-                brand1.setName(brand);
-                brandRepository.save(brand1);
-            }
-        }
         return list;
     }
 
 
     @Override
-    public List<Demo> getAllDemoData() {
-        return demoRepository.findAll();
+    public List<FlipkartProducts> getAllFlipkartProducts() {
+        return flipkartProductsRepository.findAll();
     }
 
     @Override
-    public List<Product> addBulkDataIntoProduct() {
+    public List<Product> importDataIntoProductTable() {
         List<Product> productList = new ArrayList<>();
-        List<Demo> demoList = demoRepository.findAll();
-        for (Demo demo : demoList) {
+        List<FlipkartProducts> flipkartProductsList = flipkartProductsRepository.findAll();
+        for (FlipkartProducts flipkartProducts : flipkartProductsList) {
             Product product = new Product();
-            product.setUniqId(demo.getUniq_id());
-            product.setCrawlTimestamp(demo.getCrawl_timestamp());
-            product.setProductUrl(demo.getProduct_url());
-            product.setProductName(demo.getProduct_name());
-            product.setPid(demo.getPid());
-            product.setRetailPrice(demo.getRetail_price());
-            product.setDiscountedPrice(demo.getDiscounted_price());
-            product.setImage(demo.getImage());
-            product.setIsFKAdvantageProduct(demo.getIs_FK_Advantage_product());
-            product.setDescription(demo.getDescription());
-            product.setProductRating(demo.getProduct_rating());
-            product.setOverallRating(demo.getOverall_rating());
-            product.setBrand(demo.getBrand());
+            product.setUniqId(flipkartProducts.getUniq_id());
+            product.setCrawlTimestamp(flipkartProducts.getCrawl_timestamp());
+            product.setProductUrl(flipkartProducts.getProduct_url());
+            product.setProductName(flipkartProducts.getProduct_name());
+            product.setPid(flipkartProducts.getPid());
+            product.setRetailPrice(flipkartProducts.getRetail_price());
+            product.setDiscountedPrice(flipkartProducts.getDiscounted_price());
+            product.setImage(flipkartProducts.getImage());
+            product.setIsFKAdvantageProduct(flipkartProducts.getIs_FK_Advantage_product());
+            product.setDescription(flipkartProducts.getDescription());
+            product.setProductRating(flipkartProducts.getProduct_rating());
+            product.setOverallRating(flipkartProducts.getOverall_rating());
+            product.setBrand(flipkartProducts.getBrand());
 
-            String string = demo.getProduct_category_tree();
+            String string = flipkartProducts.getProduct_category_tree();
             List<String> categories = Arrays.asList(string.toString().split(">>"));
 
             String previous = "";
