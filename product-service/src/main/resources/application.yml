@@ -10,4 +10,4 @@
 #  port: 9095
 #spring:
 #  application:
-#    name: ORDER-SERVICE
+#    name: PRODUCT-SERVICE

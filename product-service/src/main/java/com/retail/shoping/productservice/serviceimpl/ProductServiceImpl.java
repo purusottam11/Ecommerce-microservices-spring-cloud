@@ -6,6 +6,7 @@ import com.retail.shoping.productservice.model.Product;
 import com.retail.shoping.productservice.repository.ProductRepository;
 import com.retail.shoping.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,16 +15,21 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    //@Autowired
+    //private RedisTemplate<String, Product> userTemplate;
+
     @Autowired
     private ProductRepository productRepository;
 
     @Override
     public Product addProduct(Product product) {
+        if (productRepository.existsById(product.getUniqId())) {
+            throw new BusinessException(ErrorCode.PRODUCT_ALREADY_EXIST.getMessage());
+        }
         if (productRepository.findByProductName(product.getProductName()) != null) {
             throw new BusinessException(ErrorCode.PRODUCT_ALREADY_EXIST.getMessage());
         }
-        Product product1 = productRepository.save(product);
-        return product1;
+        return productRepository.save(product);
     }
 
     @Override
@@ -51,9 +57,9 @@ public class ProductServiceImpl implements ProductService {
         if (productRepository.findByPid(pid) == null) {
             return true;
         }
+
         return false;
     }
-
 
 
 }

@@ -1,0 +1,39 @@
+version: "3"
+services:
+  elk:
+    container_name: elasticsearch
+    image: "docker.elastic.co/elasticsearch/elasticsearch:7.5.2"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - cluster.name=nineleaps
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - cluster.initial_master_nodes=elasticsearch
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  mysql_service:
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "retail"
+      MYSQL_PASSWORD: "root"
+      MYSQL_USER: "root"
+    ports:
+      - "3306:3306"
+    image: "mysql:5.7.29"
+  product-service:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql_service:3306/retail"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+    depends_on:
+      - mysql_service
+      - elk
+    ports:
+      - "8080:8080"

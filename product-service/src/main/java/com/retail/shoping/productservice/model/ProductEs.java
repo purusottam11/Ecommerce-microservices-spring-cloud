@@ -1,13 +1,18 @@
 package com.retail.shoping.productservice.model;
 
 
+import org.hibernate.annotations.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Document(indexName = "productes", type = "product")
 public class ProductEs {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String uniqId;
     private String crawlTimestamp;
     private String productUrl;

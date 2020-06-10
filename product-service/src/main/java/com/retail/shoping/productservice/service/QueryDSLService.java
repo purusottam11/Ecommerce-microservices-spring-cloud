@@ -10,4 +10,8 @@ public interface QueryDSLService {
 
     List<ProductEs> searchByPriceRange(int startPrice, int endPrice);
 
+    List<ProductEs> demoSearch(String text);
+
+    List<ProductEs> boolQueryDemoSearch(String text,Integer price);
+
 }

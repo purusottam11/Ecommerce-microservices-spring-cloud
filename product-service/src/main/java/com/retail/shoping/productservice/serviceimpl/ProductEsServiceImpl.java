@@ -4,6 +4,7 @@ import com.retail.shoping.productservice.model.Product;
 import com.retail.shoping.productservice.model.ProductEs;
 import com.retail.shoping.productservice.repository.ProductEsRepository;
 import com.retail.shoping.productservice.repository.ProductRepository;
+import com.retail.shoping.productservice.service.ProductEsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,13 @@ import java.util.List;
 
 
 @Service
-public class ProductEsServiceImpl {
+public class ProductEsServiceImpl implements ProductEsService {
 
     @Autowired
     private ProductEsRepository productEsRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     List<ProductEs> list = new ArrayList<>();
 
@@ -38,4 +39,15 @@ public class ProductEsServiceImpl {
         return list;
     }
 
+    @Override
+    public ProductEs addProductEs(ProductEs productEs) {
+        return productEsRepository.save(productEs);
+    }
+
+    @Override
+    public List<ProductEs> getAllProductEs() {
+        List<ProductEs> list = new ArrayList<>();
+        productEsRepository.findAll().forEach(list::add);
+        return list;
+    }
 }
