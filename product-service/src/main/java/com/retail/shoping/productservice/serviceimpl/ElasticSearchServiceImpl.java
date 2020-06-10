@@ -1,10 +1,10 @@
 package com.retail.shoping.productservice.serviceimpl;
 
 import com.retail.shoping.productservice.model.Product;
-import com.retail.shoping.productservice.model.ProductEs;
-import com.retail.shoping.productservice.repository.ProductEsRepository;
+import com.retail.shoping.productservice.model.ProductElasticSearch;
+import com.retail.shoping.productservice.repository.ElasticSearchRepository;
 import com.retail.shoping.productservice.repository.ProductRepository;
-import com.retail.shoping.productservice.service.ProductEsService;
+import com.retail.shoping.productservice.service.ElasticSearchService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,19 +14,19 @@ import java.util.List;
 
 
 @Service
-public class ProductEsServiceImpl implements ProductEsService {
+public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     @Autowired
-    private ProductEsRepository productEsRepository;
+    private ElasticSearchRepository productEsRepository;
 
     @Autowired
     private ProductRepository productRepository;
 
-    List<ProductEs> list = new ArrayList<>();
+    List<ProductElasticSearch> list = new ArrayList<>();
 
-    public List<ProductEs> importDataIntoProductEs() {
+    public List<ProductElasticSearch> importDataIntoProductEs() {
         for (Product product : productRepository.findAll()) {
-            ProductEs productEs = new ProductEs();
+            ProductElasticSearch productEs = new ProductElasticSearch();
             BeanUtils.copyProperties(product, productEs);
             productEsRepository.save(productEs);
             list.add(productEs);
@@ -34,19 +34,19 @@ public class ProductEsServiceImpl implements ProductEsService {
         return list;
     }
 
-    public List<ProductEs> getAllEsRecord() {
-        List<ProductEs> list = (List<ProductEs>) productEsRepository.findAll();
+    public List<ProductElasticSearch> getAllEsRecord() {
+        List<ProductElasticSearch> list = (List<ProductElasticSearch>) productEsRepository.findAll();
         return list;
     }
 
     @Override
-    public ProductEs addProductEs(ProductEs productEs) {
+    public ProductElasticSearch addProductEs(ProductElasticSearch productEs) {
         return productEsRepository.save(productEs);
     }
 
     @Override
-    public List<ProductEs> getAllProductEs() {
-        List<ProductEs> list = new ArrayList<>();
+    public List<ProductElasticSearch> getAllProductEs() {
+        List<ProductElasticSearch> list = new ArrayList<>();
         productEsRepository.findAll().forEach(list::add);
         return list;
     }

@@ -1,13 +1,12 @@
 package com.retail.shoping.productservice.serviceimpl;
 
 import com.retail.shoping.productservice.model.Category;
-import com.retail.shoping.productservice.model.FlipkartProducts;
+import com.retail.shoping.productservice.model.RawProducts;
 import com.retail.shoping.productservice.model.Product;
-import com.retail.shoping.productservice.repository.BrandRepository;
 import com.retail.shoping.productservice.repository.CategoryRepository;
-import com.retail.shoping.productservice.repository.FlipkartProductsRepository;
+import com.retail.shoping.productservice.repository.RawProductRepository;
 import com.retail.shoping.productservice.repository.ProductRepository;
-import com.retail.shoping.productservice.service.FlipkartProductsService;
+import com.retail.shoping.productservice.service.DataImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +15,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class FilpkartProductsServiceImpl implements FlipkartProductsService {
+public class DataImportServiceImpl implements DataImportService {
 
     @Autowired
-    private FlipkartProductsRepository flipkartProductsRepository;
+    private RawProductRepository rawProductRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-    @Autowired
-    private BrandRepository brandRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -33,9 +29,9 @@ public class FilpkartProductsServiceImpl implements FlipkartProductsService {
     @Override
     public List<String> importDataToCategoryTable() {
         List<String> list = new ArrayList<>();
-        List<FlipkartProducts> flipkartProductsList = flipkartProductsRepository.findAll();
+        List<RawProducts> flipkartProductsList = rawProductRepository.findAll();
         int c = 0;
-        for (FlipkartProducts flipkartProducts : flipkartProductsList) {
+        for (RawProducts flipkartProducts : flipkartProductsList) {
             String string = flipkartProducts.getProduct_category_tree();
 
             List<String> categories = Arrays.asList(string.toString().split(">>"));
@@ -72,17 +68,11 @@ public class FilpkartProductsServiceImpl implements FlipkartProductsService {
         return list;
     }
 
-
-    @Override
-    public List<FlipkartProducts> getAllFlipkartProducts() {
-        return flipkartProductsRepository.findAll();
-    }
-
     @Override
     public List<Product> importDataIntoProductTable() {
         List<Product> productList = new ArrayList<>();
-        List<FlipkartProducts> flipkartProductsList = flipkartProductsRepository.findAll();
-        for (FlipkartProducts flipkartProducts : flipkartProductsList) {
+        List<RawProducts> flipkartProductsList = rawProductRepository.findAll();
+        for (RawProducts flipkartProducts : flipkartProductsList) {
             Product product = new Product();
             product.setUniqId(flipkartProducts.getUniq_id());
             product.setCrawlTimestamp(flipkartProducts.getCrawl_timestamp());

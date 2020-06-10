@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Document(indexName = "productes", type = "product")
-public class ProductEs {
+public class ProductElasticSearch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,10 +28,10 @@ public class ProductEs {
     private String overallRating;
     private String brand;
 
-    public ProductEs() {
+    public ProductElasticSearch() {
     }
 
-    public ProductEs(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, Integer retailPrice, Integer discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
+    public ProductElasticSearch(String uniqId, String crawlTimestamp, String productUrl, String productName, Long category, String pid, Integer retailPrice, Integer discountedPrice, String image, String isFKAdvantageProduct, String description, String productRating, String overallRating, String brand) {
         this.uniqId = uniqId;
         this.crawlTimestamp = crawlTimestamp;
         this.productUrl = productUrl;

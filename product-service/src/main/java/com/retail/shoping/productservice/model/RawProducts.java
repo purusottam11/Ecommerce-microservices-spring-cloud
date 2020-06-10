@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "flipkart_product_data")
-public class FlipkartProducts {
+@Table(name = "raw_product")
+public class RawProducts {
 
     @Id
     @Column
@@ -27,10 +27,10 @@ public class FlipkartProducts {
     private String brand;
     private String Product_specifications;
 
-    public FlipkartProducts() {
+    public RawProducts() {
     }
 
-    public FlipkartProducts(String uniq_id, String crawl_timestamp, String product_url, String product_name, String product_category_tree, String pid, Integer retail_price, Integer discounted_price, String image, String is_FK_Advantage_product, String description, String product_rating, String overall_rating, String brand, String product_specifications) {
+    public RawProducts(String uniq_id, String crawl_timestamp, String product_url, String product_name, String product_category_tree, String pid, Integer retail_price, Integer discounted_price, String image, String is_FK_Advantage_product, String description, String product_rating, String overall_rating, String brand, String product_specifications) {
         this.uniq_id = uniq_id;
         this.crawl_timestamp = crawl_timestamp;
         this.product_url = product_url;

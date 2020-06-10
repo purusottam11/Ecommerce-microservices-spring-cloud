@@ -19,14 +19,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/list-products")
+    @GetMapping("/listProducts")
     public List<Product> getAllProduct() {
         List<Product> products = productService.getAllProduct();
         log.debug("Response {}", products);
         return products;
     }
 
-    @PostMapping("/add-product")
+    @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product) {
         log.info("Request {}", product);
         Product product1 = new Product();
@@ -39,12 +39,12 @@ public class ProductController {
         return product1;
     }
 
-    @PostMapping("/is-product-exist")
+    @PostMapping("/isProductExist")
     public boolean isProductExist(@RequestBody String productName) {
         return productService.isProductExist(productName);
     }
 
-    @PostMapping("/is-product-out-of-stuck")
+    @PostMapping("/isProductOutOfStuck")
     public boolean isProductOutOfStuck(@RequestBody String productPid) {
         return productService.isProductOutOfStuck(productPid);
     }
