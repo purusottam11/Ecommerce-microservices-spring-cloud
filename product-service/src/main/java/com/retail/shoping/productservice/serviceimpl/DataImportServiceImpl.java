@@ -7,6 +7,7 @@ import com.retail.shoping.productservice.repository.CategoryRepository;
 import com.retail.shoping.productservice.repository.RawProductRepository;
 import com.retail.shoping.productservice.repository.ProductRepository;
 import com.retail.shoping.productservice.service.DataImportService;
+import com.retail.shoping.productservice.utils.CopyDataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,7 @@ public class DataImportServiceImpl implements DataImportService {
                         Category category = new Category();
                         category.setName(s);
                         if (categoryRepository.findByName(previous) != null) {
-                            category.setParentId(categoryRepository.findByName(previous).getId());
+                            category.setParentId(categoryRepository.findByName(previous).get().getId());
                         }
                         categoryRepository.save(category);
                         list.add(s);
@@ -74,7 +75,6 @@ public class DataImportServiceImpl implements DataImportService {
         List<RawProducts> flipkartProductsList = rawProductRepository.findAll();
         for (RawProducts flipkartProducts : flipkartProductsList) {
             Product product = new Product();
-            product.setUniqId(flipkartProducts.getUniq_id());
             product.setCrawlTimestamp(flipkartProducts.getCrawl_timestamp());
             product.setProductUrl(flipkartProducts.getProduct_url());
             product.setProductName(flipkartProducts.getProduct_name());
@@ -87,7 +87,7 @@ public class DataImportServiceImpl implements DataImportService {
             product.setProductRating(flipkartProducts.getProduct_rating());
             product.setOverallRating(flipkartProducts.getOverall_rating());
             product.setBrand(flipkartProducts.getBrand());
-
+            //CopyDataUtils.copySafe(flipkartProducts, product);
             String string = flipkartProducts.getProduct_category_tree();
             List<String> categories = Arrays.asList(string.toString().split(">>"));
 
@@ -103,7 +103,8 @@ public class DataImportServiceImpl implements DataImportService {
                     previous = s;
                 }
             }
-            product.setCategory(categoryRepository.findByName(previous).getId());
+
+            product.setCategory(categoryRepository.findByName(previous).get().getId());
             productRepository.save(product);
             productList.add(product);
         }

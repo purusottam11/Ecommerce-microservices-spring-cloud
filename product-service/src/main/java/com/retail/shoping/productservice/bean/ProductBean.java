@@ -1,36 +1,41 @@
-package com.retail.shoping.productservice.model;
+package com.retail.shoping.productservice.bean;
 
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
-@Document(indexName = "productes", type = "product")
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProductElasticSearch {
+public class ProductBean {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String uniqId;
     private String crawlTimestamp;
+
     private String productUrl;
+
     private String productName;
+
     private Long category;
+
     private String pid;
+
     private Integer retailPrice;
+
     private Integer discountedPrice;
+
     private String image;
+
     private String isFKAdvantageProduct;
+
     private String description;
+
     private String productRating;
+
     private String overallRating;
+
     private String brand;
+
+
 }

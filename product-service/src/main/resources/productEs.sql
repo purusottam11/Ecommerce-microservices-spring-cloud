@@ -1,4 +1,4 @@
-CREATE TABLE flipkart_product_data(
+CREATE TABLE raw_product(
     uniq_id VARCHAR(255),
 	crawl_timestamp VARCHAR(255),
 	product_url VARCHAR(1000),

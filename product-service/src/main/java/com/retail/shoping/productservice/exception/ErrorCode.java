@@ -3,7 +3,10 @@ package com.retail.shoping.productservice.exception;
 public enum ErrorCode {
 
     PRODUCT_NOT_FOUND("Product not found", 404),
-    PRODUCT_ALREADY_EXIST("Product is exist", 402);
+    PRODUCT_ALREADY_EXIST("Product is exist", 402),
+    CATEGORY_NOT_FOUND("Category not found", 404),
+    CATEGORY_ALREADY_EXIST("Category is already exist", 402);
+
 
     private String message;
     private int errorCode;

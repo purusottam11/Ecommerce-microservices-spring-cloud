@@ -1,5 +1,6 @@
 package com.retail.shoping.productservice.controller;
 
+import com.retail.shoping.productservice.bean.ProductBean;
 import com.retail.shoping.productservice.exception.BusinessException;
 import com.retail.shoping.productservice.model.Product;
 import com.retail.shoping.productservice.service.ProductService;
@@ -27,16 +28,20 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product) {
-        log.info("Request {}", product);
-        Product product1 = new Product();
+    public ProductBean addProduct(@RequestBody ProductBean productBean) {
+        log.info("Request {}", productBean);
         try {
-            product1 = productService.addProduct(product);
+            productBean = productService.addProduct(productBean);
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
-        log.info("Response {}", product1);
-        return product1;
+        log.info("Response {}", productBean);
+        return productBean;
+    }
+
+    @PutMapping("/updateProduct")
+    public Product updateProduct(@RequestBody Product product) {
+        return productService.upDateProduct(product);
     }
 
     @PostMapping("/isProductExist")
