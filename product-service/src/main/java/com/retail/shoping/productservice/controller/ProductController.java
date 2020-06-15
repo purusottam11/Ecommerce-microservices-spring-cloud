@@ -20,11 +20,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/listProducts")
+    @GetMapping("/getProducts")
     public List<Product> getAllProduct() {
         List<Product> products = productService.getAllProduct();
         log.debug("Response {}", products);
         return products;
+    }
+
+    @GetMapping("/getProduct/{productId}")
+    public Product getProduct(@PathVariable Long productId) {
+        return productService.getProduct(productId);
     }
 
     @PostMapping("/addProduct")
@@ -44,13 +49,5 @@ public class ProductController {
         return productService.upDateProduct(product);
     }
 
-    @PostMapping("/isProductExist")
-    public boolean isProductExist(@RequestBody String productName) {
-        return productService.isProductExist(productName);
-    }
 
-    @PostMapping("/isProductOutOfStuck")
-    public boolean isProductOutOfStuck(@RequestBody String productPid) {
-        return productService.isProductOutOfStuck(productPid);
-    }
 }

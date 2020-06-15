@@ -35,7 +35,7 @@ public class DataImportController {
 
     @GetMapping("/importProductToElasticSearch")
     public List<ProductElasticSearch> bulkImportToProductEs() {
-        List<ProductElasticSearch> list = productEsService.importDataIntoProductEs();
+        List<ProductElasticSearch> list = dataImportService.importDataIntoProductEs();
         log.debug("Response {}", list);
         return list;
     }

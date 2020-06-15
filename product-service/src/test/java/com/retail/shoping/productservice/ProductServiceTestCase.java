@@ -42,7 +42,7 @@ public class ProductServiceTestCase {
         productEs.setProductName("Alisha Solid Women's Cycling Shorts");
         productEs.setProductUrl("http://www.flipkart.com/alisha-solid-women-s-cycling-shorts/p/itmeh2ftwkzykhcg?pid=SRTEH2FVVKRBAXHB");
         productEs.setRetailPrice(1199);
-        productEs.setUniqId("ce5a6818f7707e2cb61fdcdbba61f5ad");
+        productEs.setUniqId((long) 10);
         productEsList.add(productEs);
         Mockito.when(queryDSLService.searchByProductNameAndBrand("Shorts")).thenReturn(productEsList);
         List<ProductElasticSearch> prodElastic = queryDSLService.searchByProductNameAndBrand("Shorts");
@@ -64,12 +64,12 @@ public class ProductServiceTestCase {
         productEs.setProductName("Alisha Solid Women's Cycling Shorts");
         productEs.setProductUrl("http://www.flipkart.com/alisha-solid-women-s-cycling-shorts/p/itmeh2ftwkzykhcg?pid=SRTEH2FVVKRBAXHB");
         productEs.setRetailPrice(1199);
-        productEs.setUniqId("ce5a6818f7707e2cb61fdcdbba61f5ad");
+        productEs.setUniqId((long) 5);
         productElasticList.add(productEs);
         QueryBuilder query = QueryBuilders.rangeQuery("retailPrice").from(1100.0).to(1200.0);
         Mockito.when(queryDSLService.searchByProductNameAndBrand("alisa")).thenReturn(productElasticList);
         List<ProductElasticSearch> prodElastic = queryDSLService.searchByPriceRange(1100, 1200);
-         Mockito.verify(queryDSLService).searchByProductNameAndBrand("alisa");
+        Mockito.verify(queryDSLService).searchByProductNameAndBrand("alisa");
         MatcherAssert.assertThat(prodElastic.size(), Matchers.is(Matchers.greaterThanOrEqualTo(1)));
         MatcherAssert.assertThat(prodElastic.get(0).getRetailPrice(), Matchers.is(Matchers.greaterThanOrEqualTo(1100)));
         MatcherAssert.assertThat(prodElastic.get(0).getRetailPrice(), Matchers.is(Matchers.lessThanOrEqualTo(1200)));

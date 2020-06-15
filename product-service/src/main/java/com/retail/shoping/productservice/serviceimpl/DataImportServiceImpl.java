@@ -1,13 +1,17 @@
 package com.retail.shoping.productservice.serviceimpl;
 
 import com.retail.shoping.productservice.model.Category;
+import com.retail.shoping.productservice.model.ProductElasticSearch;
 import com.retail.shoping.productservice.model.RawProducts;
 import com.retail.shoping.productservice.model.Product;
 import com.retail.shoping.productservice.repository.CategoryRepository;
+import com.retail.shoping.productservice.repository.ElasticSearchRepository;
 import com.retail.shoping.productservice.repository.RawProductRepository;
 import com.retail.shoping.productservice.repository.ProductRepository;
 import com.retail.shoping.productservice.service.DataImportService;
 import com.retail.shoping.productservice.utils.CopyDataUtils;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +20,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class DataImportServiceImpl implements DataImportService {
 
-    @Autowired
-    private RawProductRepository rawProductRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
+    private final RawProductRepository rawProductRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final ElasticSearchRepository elasticSearchRepository;
 
     @Override
     public List<String> importDataToCategoryTable() {
@@ -108,7 +109,18 @@ public class DataImportServiceImpl implements DataImportService {
             productRepository.save(product);
             productList.add(product);
         }
-
         return productList;
+    }
+
+    List<ProductElasticSearch> list = new ArrayList<>();
+
+    public List<ProductElasticSearch> importDataIntoProductEs() {
+        for (Product product : productRepository.findAll()) {
+            ProductElasticSearch productEs = new ProductElasticSearch();
+            BeanUtils.copyProperties(product, productEs);
+            elasticSearchRepository.save(productEs);
+            list.add(productEs);
+        }
+        return list;
     }
 }

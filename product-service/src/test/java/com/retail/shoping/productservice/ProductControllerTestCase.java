@@ -42,7 +42,7 @@ public class ProductControllerTestCase extends TestBase {
         productEs.setProductName("Alisha Solid Women's Cycling Shorts");
         productEs.setProductUrl("http://www.flipkart.com/alisha-solid-women-s-cycling-shorts/p/itmeh2ftwkzykhcg?pid=SRTEH2FVVKRBAXHB");
         productEs.setRetailPrice(1199);
-        productEs.setUniqId("ce5a6818f7707e2cb61fdcdbba61f5ad");
+        productEs.setUniqId((long) 10);
         productElasticList.add(productEs);
         Mockito.when(queryDSLService.searchByProductNameAndBrand("Shorts")).thenReturn(productElasticList);
         List<ProductElasticSearch> prodElastic = queryDSLController.doMultimatchQuery("Shorts");
@@ -64,7 +64,7 @@ public class ProductControllerTestCase extends TestBase {
         productEs.setProductName("Alisha Solid Women's Cycling Shorts");
         productEs.setProductUrl("http://www.flipkart.com/alisha-solid-women-s-cycling-shorts/p/itmeh2ftwkzykhcg?pid=SRTEH2FVVKRBAXHB");
         productEs.setRetailPrice(1199);
-        productEs.setUniqId("ce5a6818f7707e2cb61fdcdbba61f5ad");
+        productEs.setUniqId((long) 21);
         productElasticList.add(productEs);
         QueryBuilder query = QueryBuilders.rangeQuery("retailPrice").from(1100.0).to(1200.0);
         Mockito.when(queryDSLService.searchByPriceRange(1100, 1200)).thenReturn(productElasticList);

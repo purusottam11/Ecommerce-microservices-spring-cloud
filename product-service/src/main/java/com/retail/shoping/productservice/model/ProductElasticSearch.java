@@ -18,8 +18,8 @@ import javax.persistence.GenerationType;
 public class ProductElasticSearch {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String uniqId;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long uniqId;
     private String crawlTimestamp;
     private String productUrl;
     private String productName;
