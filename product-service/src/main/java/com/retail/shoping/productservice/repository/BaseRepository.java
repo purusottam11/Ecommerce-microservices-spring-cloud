@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface BaseRepository<E> extends JpaRepository<E, Long>, JpaSpecificationExecutor<E> {
+public interface BaseRepository<E> extends JpaRepository<E, Long> {
 
 }
